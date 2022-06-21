@@ -157,7 +157,8 @@ function commands()
 	--Properties:
 
 	CommandBar.Name = "CommandBar"
-	CommandBar.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	CommandBar.Parent = game.CoreGui
+	CommandBar.ResetOnSpawn = false
 
 	Main.Name = "Main"
 	Main.Parent = CommandBar
@@ -388,13 +389,13 @@ end)
 
 lp.Chatted:Connect(function(cmd)
 	if cmd == ">close" then
-		lp.PlayerGui.CommandBar.Enabled = false
+		game.CoreGui.CommandBar.Enabled = false
 	end
 end)
 
 lp.Chatted:Connect(function(cmd)
 	if cmd == ">open" then
-		lp.PlayerGui.CommandBar.Enabled = true
+		game.CoreGui.CommandBar.Enabled = true
 	end
 end)
 
