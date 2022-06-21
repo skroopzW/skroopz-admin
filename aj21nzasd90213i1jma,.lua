@@ -25,8 +25,8 @@ local char = lp.Character
 --| $$$    \$$$ \$$     \| $$ \$$     \ \$$    $$| $$ | $$ | $$ \$$     \      | $$  \$$$ \$$    $$  \$$  $$| $$| $$      | $$ \$$     \\$$    $$  \$$  $$| $$ \$$    $$| $$  | $$
 -- \$$      \$$  \$$$$$$$ \$$  \$$$$$$$  \$$$$$$  \$$  \$$  \$$  \$$$$$$$       \$$   \$$  \$$$$$$    \$$$$  \$$ \$$       \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$  \$$$$$$  \$$   \$$
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                
-                                                                                                                                                                                
-                                                                                                                                                                                
+
+
 
 -- Instances:
 
@@ -111,8 +111,8 @@ Welcome:Destroy()
 -- \$$    $$ \$$    $$| $$ | $$ | $$| $$ | $$ | $$ \$$    $$| $$  | $$ \$$    $$|       $$       \$$    $$ \$$    $$| $$
 --  \$$$$$$   \$$$$$$  \$$  \$$  \$$ \$$  \$$  \$$  \$$$$$$$ \$$   \$$  \$$$$$$$ \$$$$$$$         \$$$$$$   \$$$$$$  \$$
 ----------------------------------------------------------------------------------------------------------------------------------                                                                                                                      
-                                                                                                                      
-                                                                                                                      
+
+
 
 function commands()
 	for i,v in pairs(game.CoreGui:GetDescendants()) do
@@ -362,8 +362,9 @@ end
 --| $$  | $$ \$$    $$| $$ | $$ | $$| $$| $$  | $$
 -- \$$   \$$  \$$$$$$$ \$$  \$$  \$$ \$$ \$$   \$$
 ---------------------------------------------------------------------------------------                                                
-                                                
-                                                
+
+local lp = game.Players.LocalPlayer
+local char = lp.Character
 
 lp.Chatted:Connect(function(cmd)
 	if cmd == ">re" then
@@ -387,13 +388,13 @@ end)
 
 lp.Chatted:Connect(function(cmd)
 	if cmd == ">close" then
-		game.CoreGui.CommandBar.Enabled = false
+		lp.PlayerGui.CommandBar.Enabled = false
 	end
 end)
 
 lp.Chatted:Connect(function(cmd)
 	if cmd == ">open" then
-		game.CoreGui.CommandBar.Enabled = true
+		lp.PlayerGui.CommandBar.Enabled = true
 	end
 end)
 
@@ -458,15 +459,14 @@ lp.Chatted:Connect(function(cmd)
 				v.Parent = char
 			end
 		end
-		lp.Chatted:Connect(function(cmd)
-			if cmd == ">forceplay" then
-				local char = game.Players.LocalPlayer.Character
-				for i,v in pairs(char:GetDescendants()) do
-					if v.Name == "Server" then
-						v:Destroy()
-					end
+	end
+	lp.Chatted:Connect(function(cmd)
+		if cmd == ">forceplay" then
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v.Name == "Server" then
+					v:Destroy()
 				end
 			end
-		end)
-	end
+		end
+	end)
 end)
